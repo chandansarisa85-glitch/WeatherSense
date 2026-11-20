@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { WeatherProvider } from "@/context/weather-provider";
 import "./globals.css";
 import "./dashboard-layout.css";
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col">
         <WeatherProvider>{children}</WeatherProvider>
+        <Analytics />
       </body>
     </html>
   );
