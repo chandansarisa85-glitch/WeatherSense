@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="puff" cx="48%" cy="44%" r="52%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".98" />
+      <stop offset=".46" stop-color="#fff" stop-opacity=".94" />
+      <stop offset=".7" stop-color="#fff" stop-opacity=".7" />
+      <stop offset=".88" stop-color="#fff" stop-opacity=".28" />
+      <stop offset="1" stop-color="#fff" stop-opacity="0" />
+    </radialGradient>
+    <filter id="soft-edge" x="-12%" y="-12%" width="124%" height="124%">
+      <feTurbulence type="fractalNoise" baseFrequency=".028" numOctaves="2" seed="13" result="cloud-noise" />
+      <feDisplacementMap in="SourceGraphic" in2="cloud-noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
+      <feGaussianBlur stdDeviation="2" />
+    </filter>
+  </defs>
+  <ellipse cx="128" cy="128" rx="105" ry="105" fill="url(#puff)" filter="url(#soft-edge)" />
+</svg>

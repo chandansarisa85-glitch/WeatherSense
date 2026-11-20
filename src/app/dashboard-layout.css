@@ -1,0 +1,174 @@
+/* Map-centered dashboard composition overrides. Loaded after globals.css. */
+:root {
+  --type-body: 14px;
+}
+
+body {
+  font-family: var(--font-geist-sans), Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: var(--type-body);
+  line-height: 1.6;
+  letter-spacing: -.012em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.section-eyebrow { font-size:11px; letter-spacing:.14em; line-height:1.4; }
+.section-title { font-size:clamp(26px,2.3vw,32px); font-weight:550; letter-spacing:-.045em; line-height:1.12; }
+.section-description { max-width:440px; font-size:14px; line-height:1.65; }
+.stage-brand { font-size:10px; letter-spacing:.09em; }
+.stage-kicker { font-size:10px; letter-spacing:.16em; }
+.stage-title { font-size:clamp(42px,4.2vw,56px); font-weight:520; letter-spacing:-.065em; line-height:1.02; }
+.stage-intro { max-width:330px; font-size:15px; line-height:1.7; }
+.stage-place strong { font-size:15px; }
+.stage-place span,.stage-coordinate { font-size:12px; }
+.stage-source { font-size:11px; }
+.stage-panel-label { font-size:11px; letter-spacing:.12em; }
+.stage-current-time { font-size:11px; }
+.stage-condition-line { font-size:13px; }
+.stage-condition-day { font-size:11px; }
+.stage-temperature { font-size:clamp(68px,6.3vw,88px); font-weight:350; }
+.stage-feels { font-size:12px; }
+.stage-feels strong { font-size:13px; }
+.stage-sun-times span,.stage-hour > span { font-size:11px; }
+.stage-sun-times strong,.stage-hour strong { font-size:13px; }
+.stage-outlook-label { font-size:10px; }
+.metric-title { font-size:12px; }
+.stage-metrics .metric-title { font-size:11px; }
+.stage-metrics .metric-reading { font-size:clamp(20px,1.8vw,25px); font-weight:480; }
+.stage-metrics .metric-reading small { font-size:11px; }
+.stage-metrics .metric-note { font-size:10px; line-height:1.4; }
+.hour-card > p:first-child { font-size:12px; }
+.hour-card > p:nth-of-type(2) { font-size:22px; font-variant-numeric:tabular-nums; }
+.hour-card > p:last-child { font-size:12px; }
+.weekly-row { min-height:72px; }
+.weekly-row > div:first-child p:first-child { font-size:14px; }
+.weekly-row > div:first-child p:last-child { font-size:12px; }
+.weekly-row > .hidden.w-36 { font-size:12px; }
+.weekly-row > .w-9,.weekly-row > .w-12 { font-size:12px; font-variant-numeric:tabular-nums; }
+.chart-legend,.chart-x-labels { font-size:11px; }
+.chart-y-labels { font-size:10px; }
+.chat-bubble { font-size:14px; line-height:1.65; }
+.suggestion-chip { font-size:12px; }
+.assistant-input input { font-size:14px; }
+.refresh-button { font-size:12px; }
+.map-feature-head .stage-map-label { font-size:12px; }
+.map-feature-head .stage-map-subtitle { font-size:12px; }
+.map-feature-foot { font-size:11px; }
+
+.command-stage {
+  grid-template-columns: minmax(270px, .78fr) minmax(440px, 1.22fr);
+  grid-template-areas: "story current" "metrics metrics";
+}
+
+.stage-story { min-height: 390px; }
+.stage-current { position:relative; isolation:isolate; min-height:390px; padding-left:22px; transform-style:preserve-3d; }
+.stage-current::before { position:absolute; z-index:0; top:42px; right:0; width:54%; height:245px; content:""; pointer-events:none; background:radial-gradient(ellipse,rgba(84,160,198,.16),rgba(40,93,130,.06) 48%,transparent 74%); filter:blur(18px); }
+.stage-weather-visual { position:absolute; z-index:0; top:62px; right:0; width:min(54%,390px); height:220px; overflow:visible; pointer-events:none; }
+.stage-weather-visual .weather-scene { width:100%; height:100%; margin:0; transform:none; }
+.stage-weather-visual .scene-caption { display:none; }
+.stage-current > :not(.stage-weather-visual) { position:relative; z-index:1; }
+.stage-temperature-row { min-height:136px; justify-content:flex-start; }
+.stage-temperature { font-size:clamp(82px,7vw,104px); }
+.stage-feels { max-width:58%; }
+.stage-feels > span { margin-left:auto; }
+
+.map-feature-shell {
+  overflow: hidden;
+  border: 1px solid rgba(120,167,198,.18);
+  border-radius: 16px;
+  background: linear-gradient(145deg,rgba(14,32,50,.88),rgba(6,17,29,.96));
+  box-shadow: 0 22px 60px rgba(0,0,0,.18),inset 0 1px rgba(219,237,247,.035);
+}
+.map-feature-head { display:flex; align-items:center; justify-content:space-between; gap:18px; padding:17px 19px; }
+.map-feature-canvas { padding:0 12px; }
+.map-feature-canvas .weather-map-frame { height:clamp(380px,42vw,560px); border:1px solid rgba(157,191,211,.14); border-radius:10px; background:#081622; }
+.map-feature-canvas .weather-leaflet { height:100%; min-height:380px; filter:saturate(.92); }
+.map-feature-canvas .map-legend { top:auto; right:auto; bottom:10px; left:10px; width:auto; max-width:190px; border-radius:5px; padding:8px 10px; }
+.map-feature-canvas .map-legend svg { display:none; }
+.map-feature-foot { display:flex; justify-content:space-between; gap:10px; padding:12px 19px 15px; color:#8194a4; font-size:10px; }
+.map-feature-foot i { margin:0 4px; color:#536577; font-style:normal; }
+.map-feature-shell { transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease; }
+.map-feature-shell:hover { transform:translateY(-2px); border-color:rgba(120,200,222,.3); box-shadow:0 28px 72px rgba(0,0,0,.24),inset 0 1px rgba(219,237,247,.05); }
+.stage-metrics .metric-cell { transition:transform .2s ease,background-color .2s ease,box-shadow .2s ease; transform:perspective(900px) translateZ(0); }
+.stage-metrics .metric-cell:hover { z-index:2; transform:perspective(900px) translateY(-3px) rotateX(1deg); background:rgba(26,56,77,.52); box-shadow:0 12px 24px rgba(0,0,0,.2); }
+.hour-card { transform:perspective(900px) translateZ(0); transition:transform .22s ease,background .22s ease,border-color .22s ease,box-shadow .22s ease; }
+.hour-card:hover { transform:perspective(900px) translateY(-4px) rotateX(2deg); border-color:rgba(115,205,227,.28); box-shadow:0 14px 26px rgba(0,0,0,.2); }
+
+@media (max-width:1120px) {
+  .command-stage { grid-template-columns:minmax(250px,.78fr) minmax(390px,1.22fr); gap:0 18px; padding-inline:18px; }
+  .stage-brand { gap:5px; font-size:8px; letter-spacing:.075em; }
+  .stage-current { padding-left:14px; }
+  .stage-metrics { margin-inline:-18px; }
+  .stage-metrics .metric-cell { padding-inline:13px; }
+  .map-feature-canvas .weather-map-frame { height:clamp(360px,48vw,500px); }
+}
+
+@media (max-width:900px) {
+  .command-stage { grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); grid-template-areas:"story current" "metrics metrics"; gap:0 18px; }
+  .stage-story { min-height:360px; padding-bottom:19px; }
+  .stage-kicker { margin-top:42px; }
+  .stage-title br { display:block; }
+  .stage-intro { max-width:300px; margin-top:10px; }
+  .stage-place { margin-top:auto; }
+  .stage-source { margin-top:12px; }
+  .stage-current { min-height:360px; padding:2px 0 18px 15px; border-left:1px solid rgba(177,203,219,.12); }
+  .stage-current::before { top:55px; width:52%; height:205px; }
+  .stage-weather-visual { top:65px; width:50%; height:180px; }
+  .stage-temperature-row { min-height:126px; }
+  .stage-temperature { font-size:76px; }
+  .stage-feels { max-width:60%; }
+  .stage-metrics { grid-template-columns:repeat(3,minmax(0,1fr)); margin-inline:-18px; }
+  .stage-metrics .metric-cell:nth-child(3) { border-right:0; }
+  .stage-metrics .metric-cell:nth-child(n+4) { border-top:1px solid rgba(177,203,219,.11); }
+  .map-feature-head { align-items:flex-start; flex-direction:column; gap:12px; }
+  .map-feature-head .stage-map-layers { width:min(100%,420px); }
+  .map-feature-head .stage-map-layers button { flex:1; }
+  .section-title { font-size:28px; }
+  .stage-title { font-size:clamp(38px,5.6vw,46px); }
+  .stage-intro { font-size:14px; }
+}
+
+@media (max-width:640px) {
+  .command-stage { grid-template-columns:minmax(0,1fr); grid-template-areas:"story" "current" "metrics"; gap:0; margin-inline:-2px; padding:18px 15px 0; border-radius:11px; }
+  .stage-story { padding-bottom:17px; }
+  .stage-brand { font-size:8px; }
+  .stage-brand-mark { width:21px; height:21px; }
+  .stage-kicker { margin-top:26px; font-size:8px; }
+  .stage-title { margin-top:9px; font-size:2.55rem; }
+  .stage-title br { display:block; }
+  .stage-intro { max-width:340px; font-size:11px; }
+  .stage-place { margin-top:17px; }
+  .stage-coordinate { margin-top:8px; }
+  .stage-source { margin-top:11px; padding-top:10px; }
+  .stage-current { min-height:0; margin-bottom:17px; padding:13px 13px 12px; border:1px solid rgba(157,191,211,.13); border-radius:7px; background:rgba(4,13,22,.42); }
+  .stage-current::before { top:54px; right:8px; width:50%; height:150px; }
+  .stage-weather-visual { top:58px; right:3px; width:49%; height:138px; }
+  .stage-temperature-row { min-height:98px; }
+  .stage-temperature { font-size:68px; }
+  .section-eyebrow { font-size:10px; }
+  .section-title { font-size:26px; }
+  .section-description { font-size:13px; }
+  .stage-title { font-size:clamp(36px,10vw,42px); }
+  .stage-intro { font-size:14px; }
+  .stage-place strong { font-size:14px; }
+  .stage-place span,.stage-coordinate { font-size:12px; }
+  .stage-temperature { font-size:68px; }
+  .stage-metrics .metric-title { font-size:11px; }
+  .stage-metrics .metric-reading { font-size:21px; }
+  .stage-metrics .metric-note { font-size:9px; }
+  .map-feature-head { padding:14px; }
+  .map-feature-head .stage-map-layers { width:100%; }
+  .map-feature-head .stage-map-layers button { min-height:44px; }
+  .map-feature-canvas { padding:0 8px; }
+  .map-feature-canvas .weather-map-frame { height:360px; }
+  .map-feature-canvas .weather-leaflet { min-height:360px; }
+  .map-feature-canvas .map-legend { top:10px; right:10px; bottom:auto; left:auto; }
+  .map-feature-foot { flex-direction:column; gap:5px; padding:10px 14px 13px; font-size:9px; }
+  .stage-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); margin:0 -15px; }
+  .stage-metrics .metric-cell { min-height:77px; padding:11px 12px; }
+  .stage-metrics .metric-cell:nth-child(3) { border-right:1px solid rgba(177,203,219,.11); }
+  .stage-metrics .metric-cell:nth-child(even) { border-right:0; }
+  .stage-metrics .metric-cell:nth-child(n+3) { border-top:1px solid rgba(177,203,219,.11); }
+  .stage-metrics .metric-reading { font-size:1.35rem; }
+  .stage-metrics .metric-note { font-size:9px; }
+}
